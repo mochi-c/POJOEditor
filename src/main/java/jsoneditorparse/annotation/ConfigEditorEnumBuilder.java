@@ -1,0 +1,21 @@
+package jsoneditorparse.annotation;
+
+import jsoneditorparse.formateutil.EnumItemBuilder;
+
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+
+/**
+ * Description:
+ * User: Mochi
+ * version: 1.0
+ */
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.FIELD)
+public @interface ConfigEditorEnumBuilder {
+
+    Class<? extends EnumItemBuilder> itemsBuilder();
+
+}
