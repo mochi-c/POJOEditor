@@ -1,6 +1,6 @@
 package jsoneditorparse.annotation;
 
-import jsoneditorparse.formateutil.EnumItemBuilder;
+import jsoneditorparse.formateutil.IEnumItemBuilder;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -16,6 +16,6 @@ import java.lang.annotation.Target;
 @Target(ElementType.FIELD)
 public @interface ConfigEditorEnumBuilder {
 
-    Class<? extends EnumItemBuilder> itemsBuilder();
+    Class<? extends IEnumItemBuilder> itemsBuilder();
 
 }

@@ -2,7 +2,7 @@ package jsoneditorparse.parsehandler;
 
 
 import jsoneditorparse.SchemaParser;
-import jsoneditorparse.SimpleJsonEditorParserBuilder;
+import jsoneditorparse.JsonEditorParserBuilder;
 
 /**
  * Description:
@@ -12,7 +12,7 @@ import jsoneditorparse.SimpleJsonEditorParserBuilder;
 public class ArrayParseHandler extends AbstractParseHandler {
     @Override
     public void handle() {
-        SchemaParser parser = SimpleJsonEditorParserBuilder.SimpleParser(getField(), true);
+        SchemaParser parser = JsonEditorParserBuilder.SimpleParser(getField(), true, getContext().getConfig());
         parser.addHandlerLast(new ArrayItemTitleParseHandler());
         getResult().put("items", parser.parse());
     }

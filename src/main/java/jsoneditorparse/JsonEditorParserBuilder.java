@@ -1,6 +1,7 @@
 package jsoneditorparse;
 
 import jsoneditorparse.annotation.ConfigEditorUIMeta;
+import jsoneditorparse.fieldfilter.IFieldFilter;
 import jsoneditorparse.parsehandler.DesParseHandler;
 import jsoneditorparse.parsehandler.FormatDispatcherParseHandler;
 import jsoneditorparse.parsehandler.GuideParseHandler;
@@ -14,16 +15,16 @@ import java.util.List;
  * User: Mochi
  * version: 1.0
  */
-public class SimpleJsonEditorParserBuilder {
+public class JsonEditorParserBuilder {
 
-    static public SchemaParser SimpleParser(Class clazz) {
+    public static SchemaParser create(Class<?> clazz) {
         SchemaParser schemaParser = new SchemaParser(clazz);
         baseHandler(schemaParser);
         return schemaParser;
     }
 
-    static public SchemaParser SimpleParser(Field field, boolean clearGenericsClass) {
-        SchemaParser schemaParser = new SchemaParser(field, clearGenericsClass);
+    public static SchemaParser SimpleParser(Field field, boolean clearGenericsClass, Config config) {
+        SchemaParser schemaParser = new SchemaParser(field, clearGenericsClass, config);
         baseHandler(schemaParser);
         return schemaParser;
     }
@@ -33,18 +34,6 @@ public class SimpleJsonEditorParserBuilder {
         schemaParser.addHandlerLast(new GuideParseHandler());
         schemaParser.addHandlerLast(new DesParseHandler());
         schemaParser.addHandlerLast(new TitleParseHandler());
-    }
-
-    public static class Test {
-        @ConfigEditorUIMeta
-        String a;
-        @ConfigEditorUIMeta
-        String b;
-    }
-
-    public static class BB {
-        @ConfigEditorUIMeta
-        List<Test> array;
     }
 
 }

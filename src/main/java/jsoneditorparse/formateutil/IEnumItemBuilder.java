@@ -7,7 +7,7 @@ import java.util.Map;
  * User: Mochi
  * version: 1.0
  */
-public interface EnumItemBuilder {
+public interface IEnumItemBuilder {
 
     Map<String, String> getItems();
 

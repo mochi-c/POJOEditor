@@ -3,8 +3,9 @@ package jsoneditorparse.parsehandler;
 import com.alibaba.fastjson.JSONObject;
 import com.google.common.collect.Sets;
 import jsoneditorparse.SchemaParser;
-import jsoneditorparse.SimpleJsonEditorParserBuilder;
+import jsoneditorparse.JsonEditorParserBuilder;
 import jsoneditorparse.annotation.ConfigEditorUIMeta;
+import jsoneditorparse.fieldfilter.IFieldFilter;
 
 import java.lang.reflect.Field;
 import java.util.Set;
@@ -34,17 +35,15 @@ public class ClassParseHandler extends AbstractParseHandler {
     }
 
     boolean match(Field field) {
-        if (field.getAnnotation(ConfigEditorUIMeta.class) != null) {
-            return true;
-        }
-        return false;
+        IFieldFilter fieldFilter = getContext().getConfig().getFieldFilter();
+        return !fieldFilter.ignore(field);
     }
 
     @Override
     public void handle() {
         JSONObject properties = new JSONObject(true);
         for (Field field : getFields(getClazz())) {
-            SchemaParser parser = SimpleJsonEditorParserBuilder.SimpleParser(field, false);
+            SchemaParser parser = JsonEditorParserBuilder.SimpleParser(field, false, getContext().getConfig());
             properties.put(field.getName(), parser.parse());
         }
         getResult().put("properties", properties);

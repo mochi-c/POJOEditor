@@ -37,7 +37,15 @@ public class Context {
      */
     private ConfigEditorUIMeta configEditorUIMeta;
 
+    /**
+     * List模式下的泛型擦除
+     */
     private boolean clearGenericsClazz;
+
+    /**
+     * 配置
+     */
+    Config config;
 
     /**
      * 责任链模式 所有要执行解析的handler链
@@ -46,7 +54,7 @@ public class Context {
 
     JSONObject result = new JSONObject(true);
 
-    public Context(Class clazz) {
+    public Context(Class<?> clazz) {
         this.clazz = clazz;
         this.clearGenericsClazz = false;
     }
@@ -66,7 +74,7 @@ public class Context {
         } else {
             ParameterizedType listGenericType = (ParameterizedType) field.getGenericType();
             Type[] listActualTypeArguments = listGenericType.getActualTypeArguments();
-            this.clazz = (Class) listActualTypeArguments[0];
+            this.clazz = (Class<?>) listActualTypeArguments[0];
         }
         this.configEditorUIMeta = field.getAnnotation(ConfigEditorUIMeta.class);
 

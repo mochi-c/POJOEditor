@@ -2,7 +2,7 @@ package jsoneditorparse.parsehandler;
 
 import com.google.common.collect.Lists;
 import jsoneditorparse.annotation.ConfigEditorEnumBuilder;
-import jsoneditorparse.formateutil.EnumItemBuilder;
+import jsoneditorparse.formateutil.IEnumItemBuilder;
 
 import java.lang.reflect.Field;
 import java.util.List;
@@ -43,9 +43,9 @@ public class EnumBuilderParseHandler extends AbstractParseHandler {
     }
 
     Map<String, String> buildFromAnnotation(Field field) {
-        Class<? extends EnumItemBuilder> builderClass = null;
+        Class<? extends IEnumItemBuilder> builderClass = null;
         try {
-            EnumItemBuilder builder = field.getAnnotation(ConfigEditorEnumBuilder.class).itemsBuilder().newInstance();
+            IEnumItemBuilder builder = field.getAnnotation(ConfigEditorEnumBuilder.class).itemsBuilder().newInstance();
             return builder.getItems();
         } catch (Exception e) {
             throw new RuntimeException("build enum item error");
