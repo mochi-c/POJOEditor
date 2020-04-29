@@ -2,9 +2,54 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Example</title>
+
+    <!--jquery popper use for bootstrap4-->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+
+    <!--Bootstrap4-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+    <!--json-editor-->
+    <script src="https://cdn.jsdelivr.net/npm/@json-editor/json-editor@latest/dist/jsoneditor.min.js"></script>
+
+    <!--selectize-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.1/js/standalone/selectize.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.1/css/selectize.bootstrap3.css">
+    <link rel="stylesheet" href="select-bootstrap4-adjust.css">
+
+    <%-- flatpickr --%>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.5.1/flatpickr.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.5.1/flatpickr.min.css"/>
+
 </head>
 <body>
 
+<div style="width: 80%; margin:50px auto">
+    <view id="jsonEditor"></view>
+</div>
+
 </body>
+<script>
+
+    $(function () {
+        let schema = JSON.parse("{\"type\":\"object\",\"properties\":{\"autoField\":{\"type\":\"string\",\"title\":\"autoField\"},\"titleDesGuide\":{\"type\":\"string\",\"options\":{\"infoText\":\"myGuide\"},\"description\":\"myDesc\",\"title\":\"myTitle\"},\"string\":{\"type\":\"string\",\"title\":\"string\"},\"textarea\":{\"type\":\"string\",\"format\":\"textarea\",\"title\":\"textarea\"},\"timeWithSpecialResult\":{\"type\":\"string\",\"format\":\"datetime-local\",\"options\":{\"flatpickr\":{\"defaultDate\":\"today\",\"dateFormat\":\"m-d H:i:S\",\"enableSeconds\":true,\"time_24hr\":true}},\"title\":\"timeWithSpecialResult\"},\"date\":{\"type\":\"string\",\"format\":\"date\",\"options\":{\"flatpickr\":{\"defaultDate\":\"today\",\"dateFormat\":\"Y-m-d\"}},\"title\":\"date\"},\"integer\":{\"type\":\"integer\",\"title\":\"integer\"},\"number\":{\"type\":\"number\",\"title\":\"number\"},\"simpleEnumSelection\":{\"type\":\"string\",\"format\":\"selectize\",\"enum\":[\"enumA\",\"enumB\",\"enumC\"],\"options\":{\"enum_titles\":[\"enumA\",\"enumB\",\"SpecialName\"]},\"title\":\"simpleEnumSelection\"},\"dynamicEnumSelection\":{\"type\":\"string\",\"format\":\"selectize\",\"enum\":[\"Now\",\"TIME\",\"NAME\"],\"options\":{\"enum_titles\":[\"Now\",\"1588160098966\",\"SPECIALNAME\"]},\"title\":\"dynamicEnumSelection\"},\"simpleEnumTags\":{\"type\":\"array\",\"format\":\"selectize\",\"uniqueItems\":true,\"options\":{\"selectize\":{\"hideSelected\":true,\"create\":false}},\"items\":{\"type\":\"string\",\"format\":\"selectize\",\"enum\":[\"enumA\",\"enumB\",\"enumC\"],\"options\":{\"enum_titles\":[\"enumA\",\"enumB\",\"SpecialName\"]},\"title\":\"simpleEnumTags\"},\"title\":\"simpleEnumTags\"},\"dynamicEnumTags\":{\"type\":\"array\",\"format\":\"selectize\",\"uniqueItems\":true,\"options\":{\"selectize\":{\"hideSelected\":true,\"create\":false}},\"items\":{\"type\":\"string\",\"format\":\"selectize\",\"enum\":[\"Now\",\"TIME\",\"NAME\"],\"options\":{\"enum_titles\":[\"Now\",\"1588160098966\",\"SPECIALNAME\"]},\"title\":\"dynamicEnumTags\"},\"title\":\"dynamicEnumTags\"},\"simpleClass\":{\"type\":\"object\",\"properties\":{\"objA\":{\"type\":\"string\",\"title\":\"objA\"},\"objB\":{\"type\":\"string\",\"title\":\"objB\"}},\"title\":\"simpleClass\"},\"table\":{\"type\":\"array\",\"format\":\"table\",\"items\":{\"type\":\"object\",\"properties\":{\"objA\":{\"type\":\"string\",\"title\":\"objA\"},\"objB\":{\"type\":\"string\",\"title\":\"objB\"}},\"title\":\"table\"},\"title\":\"table\"},\"specialNameTabs\":{\"type\":\"array\",\"format\":\"tabs\",\"items\":{\"type\":\"object\",\"properties\":{\"objA\":{\"type\":\"string\",\"title\":\"objA\"},\"objB\":{\"type\":\"string\",\"title\":\"objB\"}},\"title\":\"specialNameTabs\",\"headerTemplate\":\"myName A:{{self.objA}} B:{{self.objB}}\"},\"title\":\"specialNameTabs\"},\"array\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"properties\":{\"objA\":{\"type\":\"string\",\"title\":\"objA\"},\"objB\":{\"type\":\"string\",\"title\":\"objB\"}},\"title\":\"array\"},\"title\":\"array\"},\"arrayStringToEnum\":{\"type\":\"array\",\"format\":\"table\",\"items\":{\"type\":\"string\",\"format\":\"selectize\",\"enum\":[\"Now\",\"TIME\",\"NAME\"],\"options\":{\"enum_titles\":[\"Now\",\"1588160098967\",\"SPECIALNAME\"]},\"title\":\"arrayStringToEnum\",\"headerTemplate\":\"{{i}} \"},\"title\":\"arrayStringToEnum\"},\"arrayStringToTime\":{\"type\":\"array\",\"format\":\"table\",\"items\":{\"type\":\"string\",\"format\":\"datetime-local\",\"options\":{\"flatpickr\":{\"defaultDate\":\"today\",\"dateFormat\":\"Y-m-d H:i:S\",\"enableSeconds\":true,\"time_24hr\":true}},\"title\":\"arrayStringToTime\",\"headerTemplate\":\"{{i}} \"},\"title\":\"arrayStringToTime\"}},\"title\":\"ExampleClass\"}\n");
+
+        let editor = document.getElementById('jsonEditor');
+        new JSONEditor(editor, {
+            theme: "bootstrap4",
+            schema: schema,
+            mode: "tree",
+            disable_array_reorder: true,  // 数组中上下移动item
+            disable_edit_json: true,
+            disable_properties: true,
+            disable_collapse: true,
+            array_controls_top: true,
+            prompt_before_delete: false,
+        });
+    })
+
+</script>
 </html>

@@ -1,0 +1,9 @@
+.selectize-dropdown,
+.selectize-input,
+.selectize-input input {
+    color: #333333;
+    font-family: inherit;
+    font-size: inherit;
+    line-height: 25.5px;
+    -webkit-font-smoothing: inherit;
+}
