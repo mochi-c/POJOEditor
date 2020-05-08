@@ -59,13 +59,12 @@ public class Context {
         this.clearGenericsClazz = false;
     }
 
-    /**
-     * @param field
-     * @param clearGenericsClazz 是否擦除泛型信息
-     *                           例如 List<String> xxx
-     *                           true  ->  clazz = String
-     *                           false ->  clazz = List
-     */
+//    /**
+//     *  clearGenericsClazz 是否擦除泛型信息
+//     *          例如 List<String> xxx
+//     *          true  ->  clazz = String
+//     *          false ->  clazz = List
+//     */
     public Context(Field field, boolean clearGenericsClazz) {
         this.field = field;
         this.clearGenericsClazz = clearGenericsClazz;

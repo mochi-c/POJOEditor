@@ -17,7 +17,7 @@ import java.util.Set;
  */
 public class ClassParseHandler extends AbstractParseHandler {
 
-    public Field[] getFields(Class clazz) {
+    public Field[] getFields(Class<?> clazz) {
         Set<Field> filedSet = Sets.newLinkedHashSet();
         try {
             for (; clazz != Object.class; clazz = clazz.getSuperclass()) {//获取本身和父级对象

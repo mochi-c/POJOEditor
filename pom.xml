@@ -4,10 +4,40 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.mochistudio</groupId>
-    <artifactId>JsonEditorSchemaParser</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <parent>
+        <groupId>org.sonatype.oss</groupId>
+        <artifactId>oss-parent</artifactId>
+        <version>9</version>
+    </parent>
 
+    <groupId>com.mochi-cell.tools</groupId>
+    <artifactId>jsoneditorschemaparser</artifactId>
+    <version>0.1.0</version>
+
+    <packaging>jar</packaging>
+    <name>jsoneditorschemaparser</name>
+    <description>parse pojo class to jsonSchema</description>
+
+    <scm>
+        <url>https://github.com/mochi-c/POJOEditor</url>
+        <connection>scm:git:https://github.com/mochi-c/POJOEditor.git</connection>
+    </scm>
+
+    <licenses>
+        <license>
+            <name>Apache 2</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+            <comments>A business-friendly OSS license</comments>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <name>mochi</name>
+            <email>564085221@qq.com</email>
+        </developer>
+    </developers>
 
     <build>
         <plugins>
