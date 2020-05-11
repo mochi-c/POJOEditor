@@ -33,10 +33,10 @@ public class FormatDispatcherParseHandler extends AbstractLinkedParseHandler {
         simpleFormatMaps.put(short.class, ConfigEditorFormat.INTEGER);
         simpleFormatMaps.put(Integer.class, ConfigEditorFormat.INTEGER);
         simpleFormatMaps.put(int.class, ConfigEditorFormat.INTEGER);
+        simpleFormatMaps.put(Long.class, ConfigEditorFormat.INTEGER);
+        simpleFormatMaps.put(long.class, ConfigEditorFormat.INTEGER);
         simpleFormatMaps.put(Float.class, ConfigEditorFormat.NUMBER);
         simpleFormatMaps.put(float.class, ConfigEditorFormat.NUMBER);
-        simpleFormatMaps.put(Long.class, ConfigEditorFormat.NUMBER);
-        simpleFormatMaps.put(long.class, ConfigEditorFormat.NUMBER);
         simpleFormatMaps.put(Double.class, ConfigEditorFormat.NUMBER);
         simpleFormatMaps.put(double.class, ConfigEditorFormat.NUMBER);
         simpleFormatMaps.put(List.class, ConfigEditorFormat.ARRAY);
@@ -73,10 +73,10 @@ public class FormatDispatcherParseHandler extends AbstractLinkedParseHandler {
                 if (getClazz().isEnum()) {
                     format = ConfigEditorFormat.SELECT;
                 }
-                if (isClearGenericsClazz() && getField().getAnnotation(ConfigEditorEnumBuilder.class) != null) {
+                if (getField().getAnnotation(ConfigEditorEnumBuilder.class) != null) {
                     format = ConfigEditorFormat.SELECT;
                 }
-                if (isClearGenericsClazz() && getField().getAnnotation(ConfigEditorDateTimeSelector.class) != null) {
+                if (getField().getAnnotation(ConfigEditorDateTimeSelector.class) != null) {
                     format = ConfigEditorFormat.DATE_SELECTOR;
                 }
             }
