@@ -2,7 +2,7 @@ package jsoneditorparse.parsehandler;
 
 import com.alibaba.fastjson.JSONObject;
 import com.google.common.base.Optional;
-import jsoneditorparse.annotation.ConfigEditorDateTimeSelector;
+import jsoneditorparse.annotation.JsonEditorDateTimeSelector;
 
 /**
  * Description:
@@ -18,7 +18,7 @@ public class TimeSelectorParseHandler extends AbstractParseHandler {
     }
 
     private JSONObject getFlatPickerConfigs() {
-        ConfigEditorDateTimeSelector annotation = getField().getAnnotation(ConfigEditorDateTimeSelector.class);
+        JsonEditorDateTimeSelector annotation = getField().getAnnotation(JsonEditorDateTimeSelector.class);
         JSONObject config = new JSONObject();
         if (annotation != null) {
             config.put("dateFormat", annotation.resultFormat());

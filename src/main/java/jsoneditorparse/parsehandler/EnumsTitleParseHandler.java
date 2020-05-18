@@ -3,7 +3,7 @@ package jsoneditorparse.parsehandler;
 import com.alibaba.fastjson.JSONObject;
 import com.google.common.base.Optional;
 import com.google.common.collect.Lists;
-import jsoneditorparse.annotation.ConfigEditorUIMeta;
+import jsoneditorparse.annotation.JsonEditorUIMeta;
 import lombok.AllArgsConstructor;
 
 import java.lang.reflect.Field;
@@ -33,7 +33,7 @@ public class EnumsTitleParseHandler extends AbstractParseHandler {
         List<String> list = Lists.newArrayList();
         for (Field field : clazz.getFields()) {
             if (field.isEnumConstant()) {
-                ConfigEditorUIMeta annotation = field.getAnnotation(ConfigEditorUIMeta.class);
+                JsonEditorUIMeta annotation = field.getAnnotation(JsonEditorUIMeta.class);
                 if (annotation != null) {
                     if (annotation.title() != null && annotation.title().length() > 0) {
                         list.add(annotation.title());

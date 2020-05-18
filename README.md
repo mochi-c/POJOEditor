@@ -135,8 +135,8 @@ POJO编辑器可以根据POJO的Class信息自动生成JosnSchema,搭配依据Js
 #### 使用
 
 ```java
-JsonEditorParserBuilder.create(ExampleClass.class).parse()
-JsonEditorParserBuilder.create(ExampleClass.class).setFieldFilter(SIMPLE_FIELD_FILTER.EVERY_FIELD).parse()
+JsonEditorParserBuilder.create(ExampleClass.class).parse();
+JsonEditorParserBuilder.create(ExampleClass.class).setFieldFilters(Lists.newArrayList(SIMPLE_FIELD_FILTER.EVERY_FIELD)).addFormatDictionary(String.class, JsonEditorFormat.TEXT_AREA).parse();
 ```
 
 ### jsonEditor
@@ -181,22 +181,30 @@ ConfigEditorUIMeta注解为field提供一些基本信息的配置,在ONLY_ANNOTA
 
 ## 支持的交互方式(FORMAT)与JAVA类型
 
-| 类型 | 效果 | Json类型 | 默认类型转换 | 类型限制 | 扩展 |
-| --- |  --- | ------- | ----------- |-------- | ---- |
-|STRING|简单的文本框|STRING|String|
-|TEXT_AREA|可调整大小的文本框,适合较多的文字内容|STRING|
-|TIME_SELECTOR|时间选择器|STRING| | |ConfigEditorDateTimeSelector|
-|DATE_SELECTOR|日期选择器|STRING| | |ConfigEditorDateTimeSelector|
-|INTEGER|整数|NUMBER|byte,short,int,long,及其包装类|
-|NUMBER|数字|NUMBER|float,double,及其包装类|
-|BOOLEAN|True,False下拉选择|BOOLEAN|boolean,Boolean|
-|BOOLEAN_CHECK_BOX|勾选框|BOOLEAN|
-|ARRAY|完全展开的数组|ARRAY|List/Set|List/Set|ConfigEditorArray|
-|TABLE|使用统一的表头展开的表格类型的数组|ARRAY| |List/Set|ConfigEditorArray| 
-|TABS|一次查看一个元素,重复使用视图的TAB页类型数组|ARRAY| |List/Set|ConfigEditorArray|
-|SELECT|下拉选择框,可以直接输入进行快捷搜索|STRING|Enum/@ConfigEditorEnumBuilder|Enum/@ConfigEditorEnumBuilder|ConfigEditorEnumBuilder
-|TAGS|标签选择器|ARRAY[STRING]|List+Format中的SELECT类型|List+Format中的SELECT类型|ConfigEditorEnumBuilder
-|OBJECT|递归解析Class对象,一般由解析器自动调用|OBJECT|其余类型
-|AUTO|根据默认类型转换自动选择
+| 类型 | 效果 | Json类型 |  类型限制 | 扩展 |
+| --- |  --- | ------- | -------- | ---- |
+|STRING|简单的文本框|String|×|×
+|TEXT_AREA|可调整大小的文本框,适合较多的文字内容|STRING|×|×
+|TIME_SELECTOR|时间选择器|STRING|×|√|
+|DATE_SELECTOR|日期选择器|STRING|×|√|
+|INTEGER|整数|NUMBER|×|×
+|NUMBER|数字|NUMBER|×|×
+|BOOLEAN|True,False下拉选择|BOOLEAN|×|×
+|BOOLEAN_CHECK_BOX|勾选框|BOOLEAN|×|×
+|ARRAY|完全展开的数组|ARRAY|√|√|
+|TABLE|使用统一的表头展开的表格类型的数组|ARRAY|√|√|
+|TABS|一次查看一个元素,重复使用视图的TAB页类型数组,页签在左侧|ARRAY|√|√|
+|TABS_TOP|一次查看一个元素,重复使用视图的TAB页类型数组,页签在顶部|ARRAY|√|√|
+|SELECT|下拉选择框,可以直接输入进行快捷搜索|STRING|√|√|
+|TAGS|标签选择器|ARRAY[STRING]|√|√|
+|OBJECT|递归解析Class对象,一般由解析器自动调用|OBJECT|-|-
+|AUTO|根据默认类型转换自动选择|-|-|-|
 
 
+|JAVA类型|默认FORMAT类型|
+| ----- | ------------|
+|STRING|STRING|
+|byte,short,int,long,及其包装类|INTEGER|
+|float,double,及其包装类|NUMBER|
+|boolean,Boolean|BOOLEAN|
+|List/Set|ARRAY|

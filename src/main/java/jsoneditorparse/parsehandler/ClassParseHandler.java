@@ -4,10 +4,10 @@ import com.alibaba.fastjson.JSONObject;
 import com.google.common.collect.Sets;
 import jsoneditorparse.SchemaParser;
 import jsoneditorparse.JsonEditorParserBuilder;
-import jsoneditorparse.annotation.ConfigEditorUIMeta;
 import jsoneditorparse.fieldfilter.IFieldFilter;
 
 import java.lang.reflect.Field;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -35,8 +35,13 @@ public class ClassParseHandler extends AbstractParseHandler {
     }
 
     boolean match(Field field) {
-        IFieldFilter fieldFilter = getContext().getConfig().getFieldFilter();
-        return !fieldFilter.ignore(field);
+        List<IFieldFilter> fieldFilters = getContext().getConfig().getFieldFilter();
+        for (IFieldFilter fieldFilter : fieldFilters) {
+            if (fieldFilter.match(field)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override

@@ -1,6 +1,6 @@
 package jsoneditorparse.fieldfilter;
 
-import jsoneditorparse.annotation.ConfigEditorUIMeta;
+import jsoneditorparse.annotation.JsonEditorUIMeta;
 
 import java.lang.reflect.Field;
 
@@ -13,15 +13,15 @@ public enum SIMPLE_FIELD_FILTER implements IFieldFilter {
 
     ONLY_ANNOTATION {
         @Override
-        public boolean ignore(Field field) {
-            return field.getAnnotation(ConfigEditorUIMeta.class) == null;
+        public boolean match(Field field) {
+            return field.getAnnotation(JsonEditorUIMeta.class) != null;
         }
     },
 
     EVERY_FIELD {
         @Override
-        public boolean ignore(Field field) {
-            return false;
+        public boolean match(Field field) {
+            return true;
         }
     }
 

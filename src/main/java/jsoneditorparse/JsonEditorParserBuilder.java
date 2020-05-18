@@ -1,14 +1,11 @@
 package jsoneditorparse;
 
-import jsoneditorparse.annotation.ConfigEditorUIMeta;
-import jsoneditorparse.fieldfilter.IFieldFilter;
 import jsoneditorparse.parsehandler.DesParseHandler;
 import jsoneditorparse.parsehandler.FormatDispatcherParseHandler;
 import jsoneditorparse.parsehandler.GuideParseHandler;
 import jsoneditorparse.parsehandler.TitleParseHandler;
 
 import java.lang.reflect.Field;
-import java.util.List;
 
 /**
  * Description:

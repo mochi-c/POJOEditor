@@ -10,8 +10,8 @@ import java.lang.reflect.Field;
 public interface IFieldFilter {
 
     /**
-     * 是否过滤掉该field
+     * 该field是否生效
      */
-    boolean ignore(Field field);
+    boolean match(Field field);
 
 }

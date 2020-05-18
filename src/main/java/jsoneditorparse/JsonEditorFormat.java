@@ -10,7 +10,7 @@ import lombok.Getter;
  * version: 1.0
  */
 @AllArgsConstructor
-public enum ConfigEditorFormat {
+public enum JsonEditorFormat {
 
     STRING(null, null, JsonSchemaType.STRING),
 
@@ -33,6 +33,8 @@ public enum ConfigEditorFormat {
     TABLE("table", ArrayParseHandler.class, JsonSchemaType.ARRAY),
 
     TABS("tabs", ArrayParseHandler.class, JsonSchemaType.ARRAY),
+
+    TABS_TOP("tabs-top", ArrayParseHandler.class, JsonSchemaType.ARRAY),
 
     TAGS("selectize", TagsParseHandler.class, JsonSchemaType.ARRAY),
 

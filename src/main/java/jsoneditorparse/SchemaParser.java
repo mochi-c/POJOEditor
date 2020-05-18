@@ -6,6 +6,7 @@ import jsoneditorparse.fieldfilter.SIMPLE_FIELD_FILTER;
 import jsoneditorparse.parsehandler.AbstractParseHandler;
 
 import java.lang.reflect.Field;
+import java.util.List;
 
 /**
  * Description:
@@ -19,9 +20,7 @@ public class SchemaParser {
     Config config;
 
     private Config defaultConfig() {
-        Config config = new Config();
-        config.setFieldFilter(SIMPLE_FIELD_FILTER.ONLY_ANNOTATION);
-        return config;
+        return new Config();
     }
 
     protected SchemaParser(Class<?> clazz) {
@@ -49,8 +48,18 @@ public class SchemaParser {
         return this;
     }
 
-    public SchemaParser setFieldFilter(IFieldFilter fieldFilter) {
+    public SchemaParser setFieldFilters(List<IFieldFilter> fieldFilter) {
         this.config.fieldFilter = fieldFilter;
+        return this;
+    }
+
+    public SchemaParser addFieldFilter(IFieldFilter fieldFilter) {
+        this.config.fieldFilter.add(fieldFilter);
+        return this;
+    }
+
+    public SchemaParser addFormatDictionary(Class<?> clazz, JsonEditorFormat format) {
+        this.config.getFormatDictionary().put(clazz, format);
         return this;
     }
 

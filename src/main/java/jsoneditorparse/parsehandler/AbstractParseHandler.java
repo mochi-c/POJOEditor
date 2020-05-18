@@ -2,7 +2,7 @@ package jsoneditorparse.parsehandler;
 
 import com.alibaba.fastjson.JSONObject;
 import jsoneditorparse.Context;
-import jsoneditorparse.annotation.ConfigEditorUIMeta;
+import jsoneditorparse.annotation.JsonEditorUIMeta;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -48,8 +48,8 @@ public abstract class AbstractParseHandler {
         return context.isClearGenericsClazz();
     }
 
-    protected ConfigEditorUIMeta getConfigEditorUIMeta() {
-        return context.getConfigEditorUIMeta();
+    protected JsonEditorUIMeta getConfigEditorUIMeta() {
+        return context.getJsonEditorUIMeta();
     }
 
     protected Field getField() {

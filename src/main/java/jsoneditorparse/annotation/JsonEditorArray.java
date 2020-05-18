@@ -1,6 +1,6 @@
 package jsoneditorparse.annotation;
 
-import jsoneditorparse.formateutil.IEnumItemBuilder;
+import jsoneditorparse.JsonEditorFormat;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -14,8 +14,13 @@ import java.lang.annotation.Target;
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
-public @interface ConfigEditorEnumBuilder {
+public @interface JsonEditorArray {
 
-    Class<? extends IEnumItemBuilder> itemsBuilder();
+    String titleItem() default "";
 
+    boolean showIndex() default true;
+
+    String titleTemplate() default "";
+
+    JsonEditorFormat itemFormat() default JsonEditorFormat.AUTO;
 }

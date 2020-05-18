@@ -1,9 +1,9 @@
 import com.google.common.collect.Maps;
-import jsoneditorparse.ConfigEditorFormat;
-import jsoneditorparse.annotation.ConfigEditorArray;
-import jsoneditorparse.annotation.ConfigEditorDateTimeSelector;
-import jsoneditorparse.annotation.ConfigEditorEnumBuilder;
-import jsoneditorparse.annotation.ConfigEditorUIMeta;
+import jsoneditorparse.JsonEditorFormat;
+import jsoneditorparse.annotation.JsonEditorArray;
+import jsoneditorparse.annotation.JsonEditorDateTimeSelector;
+import jsoneditorparse.annotation.JsonEditorEnumBuilder;
+import jsoneditorparse.annotation.JsonEditorUIMeta;
 import jsoneditorparse.formateutil.IEnumItemBuilder;
 
 
@@ -20,63 +20,63 @@ public class ExampleClass {
     String autoField;
 
     //名称提示等
-    @ConfigEditorUIMeta(title = "myTitle", desc = "myDesc", guide = "myGuide")
+    @JsonEditorUIMeta(title = "myTitle", desc = "myDesc", guide = "myGuide")
     String titleDesGuide;
 
-    @ConfigEditorUIMeta
+    @JsonEditorUIMeta
     String string;
 
-    @ConfigEditorUIMeta(format = ConfigEditorFormat.TEXT_AREA)
+    @JsonEditorUIMeta(format = JsonEditorFormat.TEXT_AREA)
     String textarea;
 
-    @ConfigEditorUIMeta(format = ConfigEditorFormat.TIME_SELECTOR)
-    @ConfigEditorDateTimeSelector(resultFormat = "m-d H:i:S")
+    @JsonEditorUIMeta(format = JsonEditorFormat.TIME_SELECTOR)
+    @JsonEditorDateTimeSelector(resultFormat = "m-d H:i:S")
     String timeWithSpecialResult;
 
-    @ConfigEditorUIMeta(format = ConfigEditorFormat.DATE_SELECTOR)
+    @JsonEditorUIMeta(format = JsonEditorFormat.DATE_SELECTOR)
     String date;
 
-    @ConfigEditorUIMeta
+    @JsonEditorUIMeta
     int integer;
 
-    @ConfigEditorUIMeta
+    @JsonEditorUIMeta
     double number;
 
-    @ConfigEditorUIMeta
+    @JsonEditorUIMeta
     SimpleEnum simpleEnumSelection;
 
-    @ConfigEditorUIMeta(format = ConfigEditorFormat.SELECT)
-    @ConfigEditorEnumBuilder(itemsBuilder = DynamicEnum.class)
+    @JsonEditorUIMeta(format = JsonEditorFormat.SELECT)
+    @JsonEditorEnumBuilder(itemsBuilder = DynamicEnum.class)
     String dynamicEnumSelection;
 
-    @ConfigEditorUIMeta(format = ConfigEditorFormat.TAGS)
+    @JsonEditorUIMeta(format = JsonEditorFormat.TAGS)
     List<SimpleEnum> simpleEnumTags;
 
-    @ConfigEditorUIMeta(format = ConfigEditorFormat.TAGS)
-    @ConfigEditorEnumBuilder(itemsBuilder = DynamicEnum.class)
+    @JsonEditorUIMeta(format = JsonEditorFormat.TAGS)
+    @JsonEditorEnumBuilder(itemsBuilder = DynamicEnum.class)
     List<String> dynamicEnumTags;
 
-    @ConfigEditorUIMeta
+    @JsonEditorUIMeta
     SimpleClass simpleClass;
 
-    @ConfigEditorUIMeta(format = ConfigEditorFormat.TABLE)
+    @JsonEditorUIMeta(format = JsonEditorFormat.TABLE)
     List<SimpleClass> table;
 
-    @ConfigEditorUIMeta(format = ConfigEditorFormat.TABS)
-    @ConfigEditorArray(titleTemplate = "myName A:{{self.objA}} B:{{self.objB}}")
+    @JsonEditorUIMeta(format = JsonEditorFormat.TABS)
+    @JsonEditorArray(titleTemplate = "myName A:{{self.objA}} B:{{self.objB}}")
     List<SimpleClass> specialNameTabs;
 
-    @ConfigEditorUIMeta
+    @JsonEditorUIMeta
     List<SimpleClass> array;
 
-    @ConfigEditorUIMeta(format = ConfigEditorFormat.TABLE)
-    @ConfigEditorArray(itemFormat = ConfigEditorFormat.SELECT)  //Can be omitted
-    @ConfigEditorEnumBuilder(itemsBuilder = DynamicEnum.class)
+    @JsonEditorUIMeta(format = JsonEditorFormat.TABLE)
+    @JsonEditorArray(itemFormat = JsonEditorFormat.SELECT)  //Can be omitted
+    @JsonEditorEnumBuilder(itemsBuilder = DynamicEnum.class)
     List<String> arrayStringToEnum;
 
-    @ConfigEditorUIMeta(format = ConfigEditorFormat.TABLE)
-    @ConfigEditorArray(itemFormat = ConfigEditorFormat.TIME_SELECTOR)   //Can be omitted
-    @ConfigEditorDateTimeSelector                                       //Can be omitted
+    @JsonEditorUIMeta(format = JsonEditorFormat.TABLE)
+    @JsonEditorArray(itemFormat = JsonEditorFormat.TIME_SELECTOR)   //Can be omitted
+    @JsonEditorDateTimeSelector                                       //Can be omitted
             List<String> arrayStringToTime;
 
     public static class DynamicEnum implements IEnumItemBuilder {
@@ -93,14 +93,14 @@ public class ExampleClass {
     public static enum SimpleEnum {
         enumA,
         enumB,
-        @ConfigEditorUIMeta(title = "SpecialName")
+        @JsonEditorUIMeta(title = "SpecialName")
         enumC
     }
 
     public static class SimpleClass {
-        @ConfigEditorUIMeta
+        @JsonEditorUIMeta
         String objA;
-        @ConfigEditorUIMeta
+        @JsonEditorUIMeta
         String objB;
     }
 

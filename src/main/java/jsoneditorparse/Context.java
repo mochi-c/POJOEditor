@@ -2,7 +2,7 @@ package jsoneditorparse;
 
 import com.alibaba.fastjson.JSONObject;
 
-import jsoneditorparse.annotation.ConfigEditorUIMeta;
+import jsoneditorparse.annotation.JsonEditorUIMeta;
 import jsoneditorparse.parsehandler.AbstractParseHandler;
 import lombok.Getter;
 import lombok.Setter;
@@ -35,7 +35,7 @@ public class Context {
     /**
      * 正在解析的主注解
      */
-    private ConfigEditorUIMeta configEditorUIMeta;
+    private JsonEditorUIMeta jsonEditorUIMeta;
 
     /**
      * List模式下的泛型擦除
@@ -57,9 +57,10 @@ public class Context {
     public Context(Class<?> clazz) {
         this.clazz = clazz;
         this.clearGenericsClazz = false;
+        this.jsonEditorUIMeta = clazz.getAnnotation(JsonEditorUIMeta.class);
     }
 
-//    /**
+    //    /**
 //     *  clearGenericsClazz 是否擦除泛型信息
 //     *          例如 List<String> xxx
 //     *          true  ->  clazz = String
@@ -75,7 +76,7 @@ public class Context {
             Type[] listActualTypeArguments = listGenericType.getActualTypeArguments();
             this.clazz = (Class<?>) listActualTypeArguments[0];
         }
-        this.configEditorUIMeta = field.getAnnotation(ConfigEditorUIMeta.class);
+        this.jsonEditorUIMeta = field.getAnnotation(JsonEditorUIMeta.class);
 
     }
 }

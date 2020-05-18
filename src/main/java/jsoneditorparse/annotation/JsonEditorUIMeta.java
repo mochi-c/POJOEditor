@@ -1,7 +1,7 @@
 package jsoneditorparse.annotation;
 
 
-import jsoneditorparse.ConfigEditorFormat;
+import jsoneditorparse.JsonEditorFormat;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -15,10 +15,10 @@ import java.lang.annotation.Target;
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.FIELD, ElementType.TYPE})
-public @interface ConfigEditorUIMeta {
+public @interface JsonEditorUIMeta {
 
     /*默认没有显式指定format, 保持type默认的format*/
-    ConfigEditorFormat format() default ConfigEditorFormat.AUTO;
+    JsonEditorFormat format() default JsonEditorFormat.AUTO;
 
     /* field的别名, 用于UI显示 */
     String title() default "";

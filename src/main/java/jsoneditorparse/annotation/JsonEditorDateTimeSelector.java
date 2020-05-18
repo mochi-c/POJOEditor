@@ -1,7 +1,5 @@
 package jsoneditorparse.annotation;
 
-import jsoneditorparse.ConfigEditorFormat;
-
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -14,13 +12,9 @@ import java.lang.annotation.Target;
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
-public @interface ConfigEditorArray {
+public @interface JsonEditorDateTimeSelector {
 
-    String titleItem() default "";
+    String resultFormat() default "Y-m-d H:i:S";
 
-    boolean showIndex() default true;
 
-    String titleTemplate() default "";
-
-    ConfigEditorFormat itemFormat() default ConfigEditorFormat.AUTO;
 }

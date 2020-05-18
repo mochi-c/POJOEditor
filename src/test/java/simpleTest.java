@@ -1,8 +1,7 @@
+import com.google.common.collect.Lists;
+import jsoneditorparse.JsonEditorFormat;
 import jsoneditorparse.JsonEditorParserBuilder;
-import jsoneditorparse.annotation.ConfigEditorUIMeta;
 import jsoneditorparse.fieldfilter.SIMPLE_FIELD_FILTER;
-
-import java.util.List;
 
 /**
  * Description:
@@ -14,6 +13,6 @@ public class simpleTest {
     public static void main(String[] args) {
         System.out.println(JsonEditorParserBuilder.create(ExampleClass.class).parse().toString());
 
-        System.out.println(JsonEditorParserBuilder.create(ExampleClass.class).setFieldFilter(SIMPLE_FIELD_FILTER.EVERY_FIELD).parse().toString());
+        System.out.println(JsonEditorParserBuilder.create(ExampleClass.class).setFieldFilters(Lists.newArrayList(SIMPLE_FIELD_FILTER.EVERY_FIELD)).addFormatDictionary(String.class, JsonEditorFormat.TEXT_AREA).parse().toString());
     }
 }

@@ -1,6 +1,6 @@
 package jsoneditorparse.parsehandler;
 
-import jsoneditorparse.annotation.ConfigEditorArray;
+import jsoneditorparse.annotation.JsonEditorArray;
 
 /**
  * Description:
@@ -12,7 +12,7 @@ public class ArrayItemTitleParseHandler extends AbstractParseHandler {
 
     @Override
     public void handle() {
-        ConfigEditorArray annotation = getField().getAnnotation(ConfigEditorArray.class);
+        JsonEditorArray annotation = getField().getAnnotation(JsonEditorArray.class);
         if (annotation != null) {
             String template = "";
             if (annotation.titleTemplate().length() > 0) {
