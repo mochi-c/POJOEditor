@@ -7,6 +7,7 @@ import jsoneditorparse.parsehandler.AbstractParseHandler;
 
 import java.lang.reflect.Field;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Description:
@@ -58,8 +59,18 @@ public class SchemaParser {
         return this;
     }
 
+    public SchemaParser addFieldFilter(List<IFieldFilter> fieldFilter) {
+        this.config.fieldFilter.addAll(fieldFilter);
+        return this;
+    }
+
     public SchemaParser addFormatDictionary(Class<?> clazz, JsonEditorFormat format) {
         this.config.getFormatDictionary().put(clazz, format);
+        return this;
+    }
+
+    public SchemaParser addFormatDictionary(Map<Class<?>, JsonEditorFormat> dictionary) {
+        this.config.getFormatDictionary().putAll(dictionary);
         return this;
     }
 

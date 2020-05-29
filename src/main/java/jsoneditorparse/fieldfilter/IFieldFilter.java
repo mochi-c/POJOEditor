@@ -10,7 +10,9 @@ import java.lang.reflect.Field;
 public interface IFieldFilter {
 
     /**
-     * 该field是否生效
+     * 该field是否生效,参与编辑
+     * @return  true    生效
+     *          false   不生效
      */
     boolean match(Field field);
 
