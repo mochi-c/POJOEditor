@@ -7,7 +7,10 @@ POJO编辑器可以根据POJO的Class信息自动生成JosnSchema,搭配依据Js
 ## 使用示例
 
 以下示例包含了编辑器支持的大部分类型
+
 <https://mochi-c.github.io/POJOEditor/>
+
+ ![image](https://github.com/mochi-c/POJOEditor/blob/master/docs/view.gif?raw=true)
 
 该示例所对应的pojo如下
 
@@ -128,7 +131,7 @@ POJO编辑器可以根据POJO的Class信息自动生成JosnSchema,搭配依据Js
 <dependency>
   <groupId>com.mochi-cell.tools</groupId>
   <artifactId>jsoneditorschemaparser</artifactId>
-  <version>0.1.1</version>
+  <version>0.1.2</version>
 </dependency>
 ```
 

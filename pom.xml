@@ -12,7 +12,7 @@
 
     <groupId>com.mochi-cell.tools</groupId>
     <artifactId>jsoneditorschemaparser</artifactId>
-    <version>0.1.1</version>
+    <version>0.1.2</version>
 
     <packaging>jar</packaging>
     <name>jsoneditorschemaparser</name>
@@ -58,7 +58,7 @@
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
-            <version>18.0</version>
+            <version>29.0-jre</version>
         </dependency>
 
         <dependency>
