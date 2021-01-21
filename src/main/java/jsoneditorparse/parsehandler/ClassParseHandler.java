@@ -37,11 +37,11 @@ public class ClassParseHandler extends AbstractParseHandler {
     boolean match(Field field) {
         List<IFieldFilter> fieldFilters = getContext().getConfig().getFieldFilter();
         for (IFieldFilter fieldFilter : fieldFilters) {
-            if (fieldFilter.match(field)) {
-                return true;
+            if (!fieldFilter.match(field)) {
+                return false;
             }
         }
-        return false;
+        return true;
     }
 
     @Override
