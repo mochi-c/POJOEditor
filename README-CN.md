@@ -135,7 +135,7 @@ POJO编辑器可以根据POJO的Class信息自动生成JosnSchema,搭配依据Js
 <dependency>
   <groupId>com.mochi-cell.tools</groupId>
   <artifactId>jsoneditorschemaparser</artifactId>
-  <version>0.1.2</version>
+  <version>0.1.3</version>
 </dependency>
 ```
 

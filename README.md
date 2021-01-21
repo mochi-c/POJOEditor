@@ -120,7 +120,7 @@ JsonEditorParser is used to parse the pojo class information in the java environ
 <dependency>
   <groupId>com.mochi-cell.tools</groupId>
   <artifactId>jsoneditorschemaparser</artifactId>
-  <version>0.1.2</version>
+  <version>0.1.3</version>
 </dependency>
 ```
 
