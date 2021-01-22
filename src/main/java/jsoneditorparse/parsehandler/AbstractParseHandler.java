@@ -2,6 +2,7 @@ package jsoneditorparse.parsehandler;
 
 import com.alibaba.fastjson.JSONObject;
 import jsoneditorparse.Context;
+import jsoneditorparse.JsonSchemaParseException;
 import jsoneditorparse.annotation.JsonEditorUIMeta;
 import lombok.Getter;
 import lombok.Setter;
@@ -38,7 +39,7 @@ public abstract class AbstractParseHandler {
     /**
      * 执行解析
      */
-    abstract public void handle();
+    abstract public void handle() throws JsonSchemaParseException;
 
     protected Class getClazz() {
         return context.getClazz();

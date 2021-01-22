@@ -1,15 +1,12 @@
 package jsoneditorparse.parsehandler;
 
-import com.google.common.collect.Maps;
 import jsoneditorparse.JsonEditorFormat;
+import jsoneditorparse.JsonSchemaParseException;
 import jsoneditorparse.annotation.JsonEditorArray;
 import jsoneditorparse.annotation.JsonEditorDateTimeSelector;
 import jsoneditorparse.annotation.JsonEditorEnumBuilder;
 
 import java.util.Collection;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 /**
  * Description:
@@ -19,7 +16,7 @@ import java.util.Set;
 public class FormatDispatcherParseHandler extends AbstractLinkedParseHandler {
 
     @Override
-    AbstractParseHandler linkedHandle() {
+    AbstractParseHandler linkedHandle() throws JsonSchemaParseException {
         JsonEditorFormat format = chooseFormat();
         getResult().put("type", format.getType().getName());
         if (format.getFormatName() != null) {
@@ -29,7 +26,7 @@ public class FormatDispatcherParseHandler extends AbstractLinkedParseHandler {
             try {
                 return format.getHandler().newInstance();
             } catch (Exception e) {
-                throw new RuntimeException("create handler error", e);
+                throw new JsonSchemaParseException("create handler error: " + e.getMessage(), e);
             }
         }
         return null;

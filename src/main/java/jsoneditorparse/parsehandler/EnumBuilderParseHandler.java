@@ -1,6 +1,7 @@
 package jsoneditorparse.parsehandler;
 
 import com.google.common.collect.Lists;
+import jsoneditorparse.JsonSchemaParseException;
 import jsoneditorparse.annotation.JsonEditorEnumBuilder;
 import jsoneditorparse.formateutil.IEnumItemBuilder;
 
@@ -16,7 +17,7 @@ import java.util.Map;
 public class EnumBuilderParseHandler extends AbstractParseHandler {
 
     @Override
-    public void handle() {
+    public void handle() throws JsonSchemaParseException {
         List<String> enums = Lists.newArrayList();
         List<String> titles = Lists.newArrayList();
         if (getClazz().isEnum()) {
@@ -42,13 +43,13 @@ public class EnumBuilderParseHandler extends AbstractParseHandler {
         return lists;
     }
 
-    Map<String, String> buildFromAnnotation(Field field) {
+    Map<String, String> buildFromAnnotation(Field field) throws JsonSchemaParseException {
         Class<? extends IEnumItemBuilder> builderClass = null;
         try {
             IEnumItemBuilder builder = field.getAnnotation(JsonEditorEnumBuilder.class).itemsBuilder().newInstance();
             return builder.getItems();
         } catch (Exception e) {
-            throw new RuntimeException("build enum item error");
+            throw new JsonSchemaParseException("build enum item error: " + e.getMessage(), e);
         }
     }
 }

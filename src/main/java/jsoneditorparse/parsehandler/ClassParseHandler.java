@@ -2,6 +2,7 @@ package jsoneditorparse.parsehandler;
 
 import com.alibaba.fastjson.JSONObject;
 import com.google.common.collect.Sets;
+import jsoneditorparse.JsonSchemaParseException;
 import jsoneditorparse.SchemaParser;
 import jsoneditorparse.JsonEditorParserBuilder;
 import jsoneditorparse.fieldfilter.IFieldFilter;
@@ -17,7 +18,7 @@ import java.util.Set;
  */
 public class ClassParseHandler extends AbstractParseHandler {
 
-    public Field[] getFields(Class<?> clazz) {
+    public Field[] getFields(Class<?> clazz) throws JsonSchemaParseException {
         Set<Field> filedSet = Sets.newLinkedHashSet();
         try {
             for (; clazz != Object.class; clazz = clazz.getSuperclass()) {//获取本身和父级对象
@@ -29,7 +30,7 @@ public class ClassParseHandler extends AbstractParseHandler {
                 }
             }
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            throw new JsonSchemaParseException("get fields error:" + e.getMessage(), e);
         }
         return filedSet.toArray(new Field[]{});
     }
@@ -45,7 +46,7 @@ public class ClassParseHandler extends AbstractParseHandler {
     }
 
     @Override
-    public void handle() {
+    public void handle() throws JsonSchemaParseException {
         JSONObject properties = new JSONObject(true);
         for (Field field : getFields(getClazz())) {
             SchemaParser parser = JsonEditorParserBuilder.SimpleParser(field, false, getContext().getConfig());

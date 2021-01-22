@@ -2,7 +2,6 @@ package jsoneditorparse;
 
 import com.alibaba.fastjson.JSONObject;
 import jsoneditorparse.fieldfilter.IFieldFilter;
-import jsoneditorparse.fieldfilter.SIMPLE_FIELD_FILTER;
 import jsoneditorparse.parsehandler.AbstractParseHandler;
 
 import java.lang.reflect.Field;
@@ -74,17 +73,23 @@ public class SchemaParser {
         return this;
     }
 
-    public JSONObject parse() {
-        context.setConfig(config);
-        while (true) {
-            AbstractParseHandler handler = context.getHandlerQueue().pollFirst();
-            if (handler == null) {
-                return context.getResult();
-            } else {
-                //handler可能在递归中调用
-                handler.setContext(context);
-                handler.handle();
+    public JSONObject parse() throws JsonSchemaParseException {
+        try {
+            context.setConfig(config);
+            while (true) {
+                AbstractParseHandler handler = context.getHandlerQueue().pollFirst();
+                if (handler == null) {
+                    return context.getResult();
+                } else {
+                    //handler可能在递归中调用
+                    handler.setContext(context);
+                    handler.handle();
+                }
             }
+        } catch (JsonSchemaParseException e) {
+            throw e;
+        } catch (Exception e) {
+            throw new JsonSchemaParseException("parse error: " + e.getMessage(), e);
         }
     }
 
