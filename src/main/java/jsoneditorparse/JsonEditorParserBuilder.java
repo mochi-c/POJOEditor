@@ -1,9 +1,6 @@
 package jsoneditorparse;
 
-import jsoneditorparse.parsehandler.DesParseHandler;
-import jsoneditorparse.parsehandler.FormatDispatcherParseHandler;
-import jsoneditorparse.parsehandler.GuideParseHandler;
-import jsoneditorparse.parsehandler.TitleParseHandler;
+import jsoneditorparse.parsehandler.*;
 
 import java.lang.reflect.Field;
 
@@ -28,6 +25,7 @@ public class JsonEditorParserBuilder {
 
     private static void baseHandler(SchemaParser schemaParser) {
         schemaParser.addHandlerLast(new FormatDispatcherParseHandler());  //format可能覆盖type
+        schemaParser.addHandlerLast(new DependenceParseHandler());
         schemaParser.addHandlerLast(new GuideParseHandler());
         schemaParser.addHandlerLast(new DesParseHandler());
         schemaParser.addHandlerLast(new TitleParseHandler());

@@ -175,7 +175,10 @@ const editor = new JSONEditor(element, options);
 
 <https://github.com/json-editor/json-editor>
 
-## @JsonEditorUIMeta
+## Base Annotation
+
+
+### @JsonEditorUIMeta
 
 JsonEditorUIMeta注解为field或class提供一些基本信息的配置,在ONLY_ANNOTATION的过滤器中也用作参与编辑的标志,对于没有标明该注解的成员,参与解析时使用默认值
 
@@ -185,6 +188,33 @@ JsonEditorUIMeta注解为field或class提供一些基本信息的配置,在ONLY_
 | desc | 描述信息,通常出现在编辑框下方 | null 不显示描述
 | format | 用来指明需要使用的交互类型 | AUTO 根据类型自动转换
 | title | 该元素的别名 | null 使用成员的命名 |
+
+### @JsonEditorDependence
+
+JsonEditorDependence注解可以会为json schema 追加 dependence option. 用以控制该 field 是否生效.
+该注解是一个多重注解,多个条件需要同时生效,该field才会参与编辑,不参与编辑field不被显示,控件生成的json数据也不包含.
+
+|成员|含义|
+| ----- | ------------|
+|dependenceKey|作为激活条件的field的name|
+|dependenceValue|作为激活条件的field的值|
+
+```java
+class Test {
+    @JsonEditorUIMeta
+    @JsonEditorDependence(dependenceKey = "simpleEnumSelection", dependenceValue = "enumA")
+    @JsonEditorDependence(dependenceKey = "dynamicEnumSelection", dependenceValue = "Now")
+    String dependenceItem;
+
+    @JsonEditorUIMeta
+    SimpleEnum simpleEnumSelection;
+
+    @JsonEditorUIMeta(format = JsonEditorFormat.SELECT)
+    @JsonEditorEnumBuilder(itemsBuilder = DynamicEnum.class)
+    String dynamicEnumSelection;
+}
+```
+上述例子中,只有当 simpleEnumSelection 为 enumA 且 dynamicEnumSelection 为 now 的时候 dependenceItem 才会生效,参与编辑.
 
 ## 交互方式(FORMAT)
 

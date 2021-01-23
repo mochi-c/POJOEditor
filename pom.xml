@@ -12,7 +12,7 @@
 
     <groupId>com.mochi-cell.tools</groupId>
     <artifactId>jsoneditorschemaparser</artifactId>
-    <version>0.1.3</version>
+    <version>0.1.4</version>
 
     <packaging>jar</packaging>
     <name>jsoneditorschemaparser</name>

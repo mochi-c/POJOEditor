@@ -3,8 +3,8 @@ English | [简体中文](./README-CN.md)
 
 <h1 align="center">POJO EDITOR</h1>
 
-The POJO editor can automatically generate JosnSchema according to the class information of the POJO, 
-that enables developer easily edite the POJO with the visual editing tool based on the JsonSchema.
+The POJO editor can automatically generate json schema according to the class information of the POJO, 
+that enables developer easily edit the POJO with the visual editing tool based on the JsonSchema.
 
 ## Example
 
@@ -161,7 +161,9 @@ const editor = new JSONEditor(element, options);
 
 <https://github.com/json-editor/json-editor>
 
-## @JsonEditorUIMeta
+## Base Annotation
+
+### @JsonEditorUIMeta
 
 The JsonEditorUIMeta annotation provides some basic information configuration for the field or class. It is also used as a field active sign when using ONLY_ANNOTATION filter. For fields without annotation, the default value will be used.
 
@@ -171,6 +173,33 @@ The JsonEditorUIMeta annotation provides some basic information configuration fo
 | desc | descriptive information, usually appears below the edit box | null(do not show)
 | format | used to indicate the interaction mode | AUTO(automatic judgment based on field class)
 | title | the title show in json-editor | null(use field name) |
+
+### @JsonEditorDependence
+
+JsonEditorDependence annotation is used to add 'dependence' option for json schema. Used to control whether the field is valid.
+This annotation is a repeatable annotation, The field will be valid when all conditions be effective at the same tim. Otherwise it will not be displayed or included in the generated json data.
+
+|Field|Info|
+| ----- | ------------|
+|dependenceKey|name of the condition field|
+|dependenceValue|value of the condition field|
+
+```java
+class Test {
+    @JsonEditorUIMeta
+    @JsonEditorDependence(dependenceKey = "simpleEnumSelection", dependenceValue = "enumA")
+    @JsonEditorDependence(dependenceKey = "dynamicEnumSelection", dependenceValue = "Now")
+    String dependenceItem;
+
+    @JsonEditorUIMeta
+    SimpleEnum simpleEnumSelection;
+
+    @JsonEditorUIMeta(format = JsonEditorFormat.SELECT)
+    @JsonEditorEnumBuilder(itemsBuilder = DynamicEnum.class)
+    String dynamicEnumSelection;
+}
+```
+In this example,'DependenceItem' will take effect only when simpleEnumSelection equals enumA and dynamicEnumSelection equals now.
 
 ## Interaction Mode(FORMAT)
 

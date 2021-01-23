@@ -1,9 +1,6 @@
 import com.google.common.collect.Maps;
 import jsoneditorparse.JsonEditorFormat;
-import jsoneditorparse.annotation.JsonEditorArray;
-import jsoneditorparse.annotation.JsonEditorDateTimeSelector;
-import jsoneditorparse.annotation.JsonEditorEnumBuilder;
-import jsoneditorparse.annotation.JsonEditorUIMeta;
+import jsoneditorparse.annotation.*;
 import jsoneditorparse.formateutil.IEnumItemBuilder;
 
 
@@ -43,6 +40,11 @@ public class ExampleClass {
     double number;
 
     @JsonEditorUIMeta
+    @JsonEditorDependence(dependenceKey = "simpleEnumSelection", dependenceValue = "enumA")
+    @JsonEditorDependence(dependenceKey = "dynamicEnumSelection", dependenceValue = "Now")
+    String dependenceItem;
+
+    @JsonEditorUIMeta
     SimpleEnum simpleEnumSelection;
 
     @JsonEditorUIMeta(format = JsonEditorFormat.SELECT)
@@ -77,7 +79,7 @@ public class ExampleClass {
     @JsonEditorUIMeta(format = JsonEditorFormat.TABLE)
     @JsonEditorArray(itemFormat = JsonEditorFormat.TIME_SELECTOR)   //Can be omitted
     @JsonEditorDateTimeSelector                                       //Can be omitted
-            List<String> arrayStringToTime;
+    List<String> arrayStringToTime;
 
     public static class DynamicEnum implements IEnumItemBuilder {
         @Override

@@ -1,13 +1,13 @@
 package jsoneditorparse.parsehandler;
 
 import com.alibaba.fastjson.JSONObject;
-import com.google.common.base.Optional;
 import com.google.common.collect.Lists;
 import jsoneditorparse.annotation.JsonEditorUIMeta;
 import lombok.AllArgsConstructor;
 
 import java.lang.reflect.Field;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Description:
@@ -20,7 +20,7 @@ public class EnumsTitleParseHandler extends AbstractParseHandler {
 
     @Override
     public void handle() {
-        JSONObject options = Optional.fromNullable(getResult().getJSONObject("options")).or(new JSONObject());
+        JSONObject options = Optional.ofNullable(getResult().getJSONObject("options")).orElse(new JSONObject());
         if (getClazz().isEnum()) {
             options.put("enum_titles", getTilesFromEnum(getClazz()));
         } else {
@@ -35,7 +35,8 @@ public class EnumsTitleParseHandler extends AbstractParseHandler {
             if (field.isEnumConstant()) {
                 JsonEditorUIMeta annotation = field.getAnnotation(JsonEditorUIMeta.class);
                 if (annotation != null) {
-                    if (annotation.title() != null && annotation.title().length() > 0) {
+                    annotation.title();
+                    if (annotation.title().length() > 0) {
                         list.add(annotation.title());
                         continue;
                     }
